@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Job from './components/job/Job.js';
 import SkillSummary from './components/skillsummary/SkillSummary.js';
@@ -6,17 +6,19 @@ import { useNavigate } from 'react-router-dom';
 import { useSkillPlanner } from './hooks/useSkillPlanner';
 import { useUrlSync } from './hooks/useUrlSync';
 import { useTheme } from './hooks/useTheme';
+import { useTranslation } from './hooks/useTranslation';
 
 function App() {
   const navigate = useNavigate();
   const skillPlanner = useSkillPlanner();
   const { saveBuild } = useUrlSync(skillPlanner);
   const { theme, toggleTheme } = useTheme();
+  const { t, locale, setLocale, availableLocales } = useTranslation();
   const [copySuccess, setCopySuccess] = useState('');
 
   const handleSaveBuild = () => {
     saveBuild();
-    setCopySuccess('Build URL copied to clipboard!');
+    setCopySuccess(t('ui.buildUrlCopied'));
     setTimeout(() => setCopySuccess(''), 3000);
   };
 
@@ -61,7 +63,7 @@ function App() {
       window.scrollTo({ top: 0, left: 0 });
     } else {
       // Different family - warn and reset
-      if (window.confirm("Changing to a different job family will reset all skills. Continue?")) {
+      if (window.confirm(t('ui.confirmJobFamilyChange'))) {
         skillPlanner.setJob(newJobId);
         navigate('/', { replace: true });
         window.scrollTo({ top: 0, left: 0 });
@@ -70,7 +72,7 @@ function App() {
   };
   
   const handleResetSkills = () => {
-    if (window.confirm("Are you sure you want to reset all skills?")) {
+    if (window.confirm(t('ui.confirmResetAllSkills'))) {
       skillPlanner.resetSkills();
       navigate('/', { replace: true });
     }
@@ -105,7 +107,7 @@ function App() {
             onChange={handleJobChange}
           >
             {skillPlanner.jobList.map((job) => (
-              <option key={job.id} value={job.id}>{job.name}</option>
+              <option key={job.id} value={job.id}>{t(job.name)}</option>
             ))}
           </select>
         </div>
@@ -113,14 +115,14 @@ function App() {
         <div className="App-totalJobPoints">
           {jobPointStatuses.map((status, index) => (
             <div key={status.job.id} className={status.isOver ? 'App-jobWarning' : ''}>
-              {status.job.name}: {status.points}/{status.job.maxPoints}
+              {t(status.job.name)}: {status.points}/{status.job.maxPoints}
             </div>
           ))}
         </div>
         
         <div className="App-jobButtons">
-          <button onClick={handleSaveBuild}>save</button>
-          <button onClick={handleResetSkills}>reset</button>
+          <button onClick={handleSaveBuild}>{t('ui.save')}</button>
+          <button onClick={handleResetSkills}>{t('ui.reset')}</button>
           <SkillSummary
             skillLevels={skillPlanner.skillLevels}
             skills={skillPlanner.currentSkills}
@@ -128,7 +130,16 @@ function App() {
             skillPointsByJob={skillPlanner.skillPointsByJob}
             jobChain={skillPlanner.jobChain}
           />
-          <button onClick={toggleTheme} title="Toggle theme">
+          <select 
+            value={locale} 
+            onChange={(e) => setLocale(e.target.value)}
+            title={t('ui.language')}
+          >
+            {availableLocales.map(loc => (
+              <option key={loc.code} value={loc.code}>{loc.name}</option>
+            ))}
+          </select>
+          <button onClick={toggleTheme} title={t('ui.toggleTheme')}>
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
         </div>

@@ -1,13 +1,10 @@
-import { useRef, useEffect } from 'react';
-import Skill from '../skill/Skill.js';
-import SkillConnections from '../connections/SkillConnections.js';
 import JobSection from './JobSection.js';
+import { useTranslation } from '../../hooks/useTranslation';
 import './job.css';
 
-const COLUMNS_COUNT = 5;
-
 function Job({ data: jobData, skillLevels, setSkillLevel, advancementOptions, onAdvance, advancedJobId, onResetJobSkills }) {
-  const { name, baseJob, jobChain, skills } = jobData;
+  const { name, jobChain, skills } = jobData;
+  const { t } = useTranslation();
 
   const handleSkillUpdate = (skillId, max) => (newValue) => {
     setSkillLevel(skillId, newValue, max);
@@ -15,7 +12,7 @@ function Job({ data: jobData, skillLevels, setSkillLevel, advancementOptions, on
 
   const renderSkillsInTree = () => {
     if (!skills || !jobChain || jobChain.length === 0) {
-      return <div>No skills loaded</div>;
+      return <div>{t('ui.noSkillsLoaded')}</div>;
     }
 
     return (
@@ -34,7 +31,7 @@ function Job({ data: jobData, skillLevels, setSkillLevel, advancementOptions, on
         {/* Show advancement options if tier 1 job and no advanced job selected */}
         {jobChain.length === 1 && jobChain[0].tier === 1 && advancementOptions && advancementOptions.length > 0 && !advancedJobId && (
           <div className="Job-advancement">
-            <div className="Job-advancementTitle">Advance to:</div>
+            <div className="Job-advancementTitle">{t('ui.advanceTo')}</div>
             <div className="Job-advancementButtons">
               {advancementOptions.map(advJob => (
                 <button 
@@ -42,7 +39,7 @@ function Job({ data: jobData, skillLevels, setSkillLevel, advancementOptions, on
                   onClick={() => onAdvance(advJob.id)}
                   className="Job-advancementButton"
                 >
-                  {advJob.name}
+                  {t(advJob.name)}
                 </button>
               ))}
             </div>
@@ -56,7 +53,7 @@ function Job({ data: jobData, skillLevels, setSkillLevel, advancementOptions, on
               onClick={() => onAdvance(null)}
               className="Job-advancementButton Job-advancementButton--remove"
             >
-              Remove Advanced Job
+              {t('ui.removeAdvancedJob')}
             </button>
           </div>
         )}
@@ -69,8 +66,8 @@ function Job({ data: jobData, skillLevels, setSkillLevel, advancementOptions, on
       <div className="Job-header">
         <div className="Job-title">
           {jobChain.length > 1 
-            ? jobChain.map(j => j.name).join(' → ')
-            : name
+            ? jobChain.map(j => t(j.name)).join(' → ')
+            : t(name)
           }
         </div>
       </div>

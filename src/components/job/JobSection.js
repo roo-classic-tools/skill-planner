@@ -1,11 +1,13 @@
 import { useRef } from 'react';
 import Skill from '../skill/Skill.js';
 import SkillConnections from '../connections/SkillConnections.js';
+import { useTranslation } from '../../hooks/useTranslation';
 
 const COLUMNS_COUNT = 5;
 
 function JobSection({ job, skills, skillLevels, handleSkillUpdate, onResetJob }) {
   const gridRef = useRef(null);
+  const { t } = useTranslation();
 
   const renderJobSkills = () => {
     if (!job || !job.skillTree) return null;
@@ -45,7 +47,7 @@ function JobSection({ job, skills, skillLevels, handleSkillUpdate, onResetJob })
   });
 
   const handleReset = () => {
-    if (window.confirm(`Reset all ${job.name} skills?`)) {
+    if (window.confirm(t('ui.confirmResetJobSkills', { jobName: t(job.name) }))) {
       onResetJob(job.id);
     }
   };
@@ -53,14 +55,14 @@ function JobSection({ job, skills, skillLevels, handleSkillUpdate, onResetJob })
   return (
     <div className="Job-section">
       <div className="Job-sectionHeader">
-        {job.name}
+        {t(job.name)}
         {hasSkills && (
           <button 
             onClick={handleReset}
             className="Job-sectionButton"
-            title={`Reset ${job.name} skills`}
+            title={t('ui.resetJobSkillsTitle', { jobName: t(job.name) })}
           >
-            reset
+            {t('ui.reset')}
           </button>
         )}
       </div>

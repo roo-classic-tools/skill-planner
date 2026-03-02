@@ -1,7 +1,7 @@
 [
   {
     "id": 1000,
-    "name": "Bash",
+    "name": "skill.bash",
     "max": 10,
     "jobId": 1,
     "prevIds": [],
@@ -9,7 +9,7 @@
   },
   {
     "id": 1001,
-    "name": "Sword Mastery",
+    "name": "skill.swordMastery",
     "max": 10,
     "jobId": 1,
     "prevIds": [],
@@ -17,7 +17,7 @@
   },
   {
     "id": 1002,
-    "name": "Increase Rec",
+    "name": "skill.increaseRec",
     "max": 10,
     "jobId": 1,
     "prevIds": [],
@@ -25,7 +25,7 @@
   },
   {
     "id": 1003,
-    "name": "Magnum Break",
+    "name": "skill.magnumBreak",
     "max": 10,
     "jobId": 1,
     "prevIds": [1000],
@@ -33,7 +33,7 @@
   },
   {
     "id": 1004,
-    "name": "Fatal Blow",
+    "name": "skill.fatalBlow",
     "max": 5,
     "jobId": 1,
     "prevIds": [1000],
@@ -41,7 +41,7 @@
   },
   {
     "id": 1005,
-    "name": "Provoke",
+    "name": "skill.provoke",
     "max": 10,
     "jobId": 1,
     "prevIds": [],
@@ -49,7 +49,7 @@
   },
   {
     "id": 1006,
-    "name": "Endure",
+    "name": "skill.endure",
     "max": 10,
     "jobId": 1,
     "prevIds": [1005],
@@ -57,7 +57,7 @@
   },
   {
     "id": 1007,
-    "name": "Berserk",
+    "name": "skill.berserk",
     "max": 1,
     "jobId": 1,
     "prevIds": [],
@@ -65,7 +65,7 @@
   },
   {
     "id": 2000,
-    "name": "Riding",
+    "name": "skill.riding",
     "max": 1,
     "jobId": 2,
     "prevIds": [],
@@ -73,7 +73,7 @@
   },
   {
     "id": 2001,
-    "name": "Spear Mastery",
+    "name": "skill.spearMastery",
     "max": 10,
     "jobId": 2,
     "prevIds": [],
@@ -81,7 +81,7 @@
   },
   {
     "id": 2002,
-    "name": "Spear Boomerang",
+    "name": "skill.spearBoomerang",
     "max": 2,
     "jobId": 2,
     "prevIds": [],
@@ -89,7 +89,7 @@
   },
   {
     "id": 2003,
-    "name": "Sword Quicken",
+    "name": "skill.swordQuicken",
     "max": 1,
     "jobId": 2,
     "prevIds": [],
@@ -97,7 +97,7 @@
   },
   {
     "id": 2004,
-    "name": "Sturdy Strike",
+    "name": "skill.sturdyStrike",
     "max": 10,
     "jobId": 2,
     "prevIds": [],
@@ -105,7 +105,7 @@
   },
   {
     "id": 2005,
-    "name": "Cavalier Mastery",
+    "name": "skill.cavalierMastery",
     "max": 5,
     "jobId": 2,
     "prevIds": [2000],
@@ -113,7 +113,7 @@
   },
   {
     "id": 2006,
-    "name": "Pierce",
+    "name": "skill.pierce",
     "max": 10,
     "jobId": 2,
     "prevIds": [2001],
@@ -121,31 +121,31 @@
   },
   {
     "id": 2007,
-    "name": "Spear Stab",
+    "name": "skill.spearStab",
     "max": 10,
     "jobId": 2,
-    "prevIds": [2002],
-    "prevLevels": [1]
+    "prevIds": [2001],
+    "prevLevels": [5]
   },
   {
     "id": 2008,
-    "name": "Bowling Bash",
+    "name": "skill.bowlingBash",
     "max": 10,
     "jobId": 2,
-    "prevIds": [],
-    "prevLevels": []
+    "prevIds": [2003],
+    "prevLevels": [5]
   },
   {
     "id": 2009,
-    "name": "Lion Roar",
+    "name": "skill.lionRoar",
     "max": 10,
     "jobId": 2,
-    "prevIds": [],
-    "prevLevels": []
+    "prevIds": [2004],
+    "prevLevels": [5]
   },
   {
     "id": 2010,
-    "name": "Brandish Spear",
+    "name": "skill.brandishSpear",
     "max": 10,
     "jobId": 2,
     "prevIds": [2005],
@@ -153,31 +153,31 @@
   },
   {
     "id": 2011,
-    "name": "Charge Attack",
+    "name": "skill.chargeAttack",
     "max": 1,
     "jobId": 2,
-    "prevIds": [2007],
-    "prevLevels": [5]
+    "prevIds": [],
+    "prevLevels": []
   },
   {
     "id": 2012,
-    "name": "Vanguard Force",
+    "name": "skill.vanguardForce",
     "max": 10,
     "jobId": 2,
-    "prevIds": [],
-    "prevLevels": []
+    "prevIds": [2008],
+    "prevLevels": [5]
   },
   {
     "id": 2013,
-    "name": "Iron Will",
+    "name": "skill.ironWill",
     "max": 10,
     "jobId": 2,
-    "prevIds": [],
-    "prevLevels": []
+    "prevIds": [2009],
+    "prevLevels": [5]
   },
   {
     "id": 3000,
-    "name": "Holy Light",
+    "name": "skill.holyLight",
     "max": 5,
     "jobId": 3,
     "prevIds": [],
@@ -185,7 +185,7 @@
   },
   {
     "id": 3001,
-    "name": "Demon Bane",
+    "name": "skill.demonBane",
     "max": 10,
     "jobId": 3,
     "prevIds": [],
@@ -193,7 +193,7 @@
   },
   {
     "id": 3002,
-    "name": "Heal",
+    "name": "skill.heal",
     "max": 10,
     "jobId": 3,
     "prevIds": [],
@@ -201,7 +201,7 @@
   },
   {
     "id": 3003,
-    "name": "Teleport",
+    "name": "skill.teleport",
     "max": 1,
     "jobId": 3,
     "prevIds": [],
@@ -209,7 +209,7 @@
   },
   {
     "id": 3004,
-    "name": "Blessing",
+    "name": "skill.blessing",
     "max": 10,
     "jobId": 3,
     "prevIds": [3000],
@@ -217,7 +217,7 @@
   },
   {
     "id": 3005,
-    "name": "Signum Crusis",
+    "name": "skill.signumCrusis",
     "max": 10,
     "jobId": 3,
     "prevIds": [3001],
@@ -225,7 +225,7 @@
   },
   {
     "id": 3006,
-    "name": "Angelus",
+    "name": "skill.angelus",
     "max": 10,
     "jobId": 3,
     "prevIds": [3002],
@@ -233,7 +233,7 @@
   },
   {
     "id": 3007,
-    "name": "Increase Agility",
+    "name": "skill.increaseAgility",
     "max": 5,
     "jobId": 3,
     "prevIds": [3004],
@@ -241,7 +241,7 @@
   },
   {
     "id": 3008,
-    "name": "Kyrie Eleison",
+    "name": "skill.kyrieEleison",
     "max": 10,
     "jobId": 3,
     "prevIds": [3006],
@@ -249,7 +249,7 @@
   },
   {
     "id": 3009,
-    "name": "Ruwach",
+    "name": "skill.ruwach",
     "max": 1,
     "jobId": 3,
     "prevIds": [],

@@ -1,22 +1,24 @@
 import { useState } from 'react';
 import './SkillSummary.css';
+import { useTranslation } from '../../hooks/useTranslation';
 
 function SkillSummary({ skillLevels, skills, onSaveBuild, skillPointsByJob, jobChain }) {
+  const { t } = useTranslation();
   const [showSummary, setShowSummary] = useState(false);
-  const [copyButtonText, setCopyButtonText] = useState('copy build link');
+  const [isCopied, setIsCopied] = useState(false);
     
   const onToggleSummary = () => {
     setShowSummary(!showSummary);
     if (showSummary) {
-      setCopyButtonText('copy build link');
+      setIsCopied(false);
     }
   };
 
   const handleCopyLink = () => {
     onSaveBuild();
-    setCopyButtonText('copied build link!');
+    setIsCopied(true);
     setTimeout(() => {
-      setCopyButtonText('copy build link');
+      setIsCopied(false);
     }, 2000);
   };
 
@@ -47,18 +49,16 @@ function SkillSummary({ skillLevels, skills, onSaveBuild, skillPointsByJob, jobC
     return null;
   }
 
-  const buttonText = showSummary ? 'hide summary' : 'show summary';
-
   return (
     <>
       <button className="SkillSummary-toggleButton" onClick={onToggleSummary}>
-        {buttonText}
+        {t('ui.showSummary')}
       </button>
       {showSummary && (
         <div className="SkillSummary-overlay" onClick={onToggleSummary}>
           <div className="SkillSummary-modal" onClick={(e) => e.stopPropagation()}>
             <div className="SkillSummary-header">
-              <h3>{jobChain.map(j => j.name).join(' → ')}</h3>
+              <h3>{jobChain.map(j => t(j.name)).join(' → ')}</h3>
               <button className="SkillSummary-close" onClick={onToggleSummary}>×</button>
             </div>
             
@@ -72,13 +72,13 @@ function SkillSummary({ skillLevels, skills, onSaveBuild, skillPointsByJob, jobC
                 return (
                   <div key={job.id} className="SkillSummary-jobSection">
                     <div className="SkillSummary-jobHeader">
-                      <span className="SkillSummary-jobName">{job.name}</span>
+                      <span className="SkillSummary-jobName">{t(job.name)}</span>
                       <span className="SkillSummary-jobPoints">{points}/{job.maxPoints}</span>
                     </div>
                     {jobSkills.map(skill => (
                       <div key={skill.skillId} className="SkillSummary-itemLine">
                         <div className="SkillSummary-levelValue">
-                          {skill.name}: {skill.level}/{skill.max}
+                          {t(skill.name)}: {skill.level}/{skill.max}
                         </div>
                       </div>
                     ))}
@@ -89,7 +89,7 @@ function SkillSummary({ skillLevels, skills, onSaveBuild, skillPointsByJob, jobC
             
             <div className="SkillSummary-footer">
               <button className="SkillSummary-copyButton" onClick={handleCopyLink}>
-                {copyButtonText}
+                {isCopied ? t('ui.copiedBuildLink') : t('ui.copyBuildLink')}
               </button>
             </div>
           </div>

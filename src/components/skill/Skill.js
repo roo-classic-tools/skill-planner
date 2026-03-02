@@ -1,4 +1,5 @@
 import './Skill.css';
+import { useTranslation } from '../../hooks/useTranslation';
 
 function Skill({ 
   name: skillName, 
@@ -9,6 +10,7 @@ function Skill({
   prevLevelsCurrent = [],
   updateSkill
 }) {
+  const { t } = useTranslation();
 
   const handleIncrement = (increment) => () => {
     updateSkill((currentLevel || 0) + increment);
@@ -29,6 +31,7 @@ function Skill({
   };
 
   const canIncreaseSkill = canIncrease();
+  const isLocked = !canIncreaseSkill && currentLevel === 0;
 
   const incrementButton = (
     <button 
@@ -53,9 +56,12 @@ function Skill({
   );
 
   return (
-    <div className="Skill">
+    <div className={`Skill ${isLocked ? 'Skill--locked' : ''}`}>
+      <div className="Skill-iconPlaceholder">
+        {/* Sprite will go here */}
+      </div>
       <div className="Skill-details">
-        <div className="Skill-name">{skillName}</div>
+        <div className="Skill-name">{t(skillName)}</div>
         <div className="Skill-modifiers">
           {decrementButton}
           <div className="Skill-value">{currentLevel}/{max}</div>

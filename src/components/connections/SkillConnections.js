@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import './SkillConnections.css';
+import { useTranslation } from '../../hooks/useTranslation';
 
 function SkillConnections({ gridRef, skills, skillTree, skillLevels, columnsCount }) {
   const [connections, setConnections] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!gridRef || !gridRef.current || !skills || !skillTree) return;
@@ -98,6 +100,10 @@ function SkillConnections({ gridRef, skills, skillTree, skillLevels, columnsCoun
                       L ${conn.targetX} ${midY} 
                       L ${conn.targetX} ${conn.targetY}`;
 
+        // Position label near the target (endpoint), offset to the side
+        const labelX = conn.targetX + 8;
+        const labelY = conn.targetY + -2;
+
         return (
           <g key={conn.id}>
             <path
@@ -107,12 +113,12 @@ function SkillConnections({ gridRef, skills, skillTree, skillLevels, columnsCoun
               strokeWidth="2"
             />
             <text
-              x={(conn.sourceX + conn.targetX) / 2}
-              y={midY - 5}
+              x={labelX}
+              y={labelY}
               className="SkillConnections-label"
-              textAnchor="middle"
+              textAnchor="start"
             >
-              Lv.{conn.requiredLevel}
+              {t('ui.level')}{conn.requiredLevel}
             </text>
           </g>
         );
