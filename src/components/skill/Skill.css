@@ -1,0 +1,89 @@
+@import '../../styles/variables.css';
+
+.Skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+.Skill-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.Skill-name {
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.3;
+}
+
+.Skill-modifiers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.Skill-value {
+  font-size: var(--font-md);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  min-width: 3rem;
+}
+
+.Skill-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--skill-button-size);
+  height: var(--skill-button-size);
+  font-size: var(--font-lg);
+  font-weight: var(--font-bold);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: white;
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  padding: 0;
+}
+
+.Skill-button:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  transform: scale(1.05);
+}
+
+.Skill-button:active:not(:disabled) {
+  background-color: var(--color-primary-active);
+  transform: scale(0.95);
+}
+
+.Skill-button:disabled {
+  background-color: var(--color-button-disabled);
+  color: var(--color-button-disabled-text);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 1024px) {
+  .Skill-name {
+    font-size: var(--font-xs);
+    min-height: 2rem;
+  }
+}

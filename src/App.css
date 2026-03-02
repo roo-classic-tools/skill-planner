@@ -1,0 +1,104 @@
+@import './styles/variables.css';
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  position: sticky;
+  top: 0;
+  padding: var(--space-md);
+  width: 100%;
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  z-index: var(--z-sticky);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.App-copiedUrl {
+  overflow: hidden;
+  transition: height var(--transition-base);
+  color: var(--color-success);
+  font-weight: var(--font-medium);
+  font-size: var(--font-sm);
+}
+
+.App-jobContent {
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-md);
+  flex-grow: 1;
+  width: 100%;
+}
+
+.App-jobName select {
+  font-size: var(--font-lg);
+  font-weight: var(--font-semibold);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.App-jobName select:hover {
+  border-color: var(--color-border-hover);
+}
+
+.App-totalJobPoints {
+  font-size: var(--font-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-secondary);
+}
+
+.App-jobWarning {
+  color: var(--color-warning);
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  margin-top: var(--space-xs);
+}
+
+.App-jobButtons {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.App-jobButtons button {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.App-jobButtons button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.App-jobButtons button:active {
+  background-color: var(--color-primary-active);
+}
+
+@media (max-width: 640px) {
+  .App-header {
+    padding: var(--space-md) var(--space-sm);
+  }
+  
+  .App-jobContent {
+    padding: var(--space-xl) var(--space-sm);
+  }
+}

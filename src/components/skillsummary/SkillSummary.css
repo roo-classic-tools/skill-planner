@@ -1,0 +1,153 @@
+@import '../../styles/variables.css';
+
+.SkillSummary-toggleButton {
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.SkillSummary-toggleButton:hover {
+  background-color: var(--color-border);
+}
+
+.SkillSummary-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-overlay);
+}
+
+.SkillSummary-modal {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  max-width: 500px;
+  max-height: 80vh;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+}
+
+.SkillSummary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-md);
+}
+
+.SkillSummary-header h3 {
+  margin: 0;
+  font-size: var(--font-lg);
+  color: var(--color-text-primary);
+  flex: 1;
+}
+
+.SkillSummary-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.SkillSummary-close:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.SkillSummary-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-md);
+  overflow-y: auto;
+}
+
+.SkillSummary-jobSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.SkillSummary-jobHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-semibold);
+}
+
+.SkillSummary-jobName {
+  font-size: var(--font-md);
+  color: var(--color-text-primary);
+}
+
+.SkillSummary-jobPoints {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+}
+
+.SkillSummary-footer {
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+}
+
+.SkillSummary-copyButton {
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--font-md);
+  font-weight: var(--font-medium);
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.SkillSummary-copyButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.SkillSummary-copyButton:active {
+  background-color: var(--color-primary-active);
+}
+
+.SkillSummary-itemLine {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+}
+
+.SkillSummary-levelValue {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+}

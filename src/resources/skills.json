@@ -1,0 +1,258 @@
+[
+  {
+    "id": 1000,
+    "name": "Bash",
+    "max": 10,
+    "jobId": 1,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 1001,
+    "name": "Sword Mastery",
+    "max": 10,
+    "jobId": 1,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 1002,
+    "name": "Increase Rec",
+    "max": 10,
+    "jobId": 1,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 1003,
+    "name": "Magnum Break",
+    "max": 10,
+    "jobId": 1,
+    "prevIds": [1000],
+    "prevLevels": [5]
+  },
+  {
+    "id": 1004,
+    "name": "Fatal Blow",
+    "max": 5,
+    "jobId": 1,
+    "prevIds": [1000],
+    "prevLevels": [5]
+  },
+  {
+    "id": 1005,
+    "name": "Provoke",
+    "max": 10,
+    "jobId": 1,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 1006,
+    "name": "Endure",
+    "max": 10,
+    "jobId": 1,
+    "prevIds": [1005],
+    "prevLevels": [5]
+  },
+  {
+    "id": 1007,
+    "name": "Berserk",
+    "max": 1,
+    "jobId": 1,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2000,
+    "name": "Riding",
+    "max": 1,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2001,
+    "name": "Spear Mastery",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2002,
+    "name": "Spear Boomerang",
+    "max": 2,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2003,
+    "name": "Sword Quicken",
+    "max": 1,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2004,
+    "name": "Sturdy Strike",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2005,
+    "name": "Cavalier Mastery",
+    "max": 5,
+    "jobId": 2,
+    "prevIds": [2000],
+    "prevLevels": [1]
+  },
+  {
+    "id": 2006,
+    "name": "Pierce",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [2001],
+    "prevLevels": [5]
+  },
+  {
+    "id": 2007,
+    "name": "Spear Stab",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [2002],
+    "prevLevels": [1]
+  },
+  {
+    "id": 2008,
+    "name": "Bowling Bash",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2009,
+    "name": "Lion Roar",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2010,
+    "name": "Brandish Spear",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [2005],
+    "prevLevels": [5]
+  },
+  {
+    "id": 2011,
+    "name": "Charge Attack",
+    "max": 1,
+    "jobId": 2,
+    "prevIds": [2007],
+    "prevLevels": [5]
+  },
+  {
+    "id": 2012,
+    "name": "Vanguard Force",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 2013,
+    "name": "Iron Will",
+    "max": 10,
+    "jobId": 2,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 3000,
+    "name": "Holy Light",
+    "max": 5,
+    "jobId": 3,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 3001,
+    "name": "Demon Bane",
+    "max": 10,
+    "jobId": 3,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 3002,
+    "name": "Heal",
+    "max": 10,
+    "jobId": 3,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 3003,
+    "name": "Teleport",
+    "max": 1,
+    "jobId": 3,
+    "prevIds": [],
+    "prevLevels": []
+  },
+  {
+    "id": 3004,
+    "name": "Blessing",
+    "max": 10,
+    "jobId": 3,
+    "prevIds": [3000],
+    "prevLevels": [1]
+  },
+  {
+    "id": 3005,
+    "name": "Signum Crusis",
+    "max": 10,
+    "jobId": 3,
+    "prevIds": [3001],
+    "prevLevels": [1]
+  },
+  {
+    "id": 3006,
+    "name": "Angelus",
+    "max": 10,
+    "jobId": 3,
+    "prevIds": [3002],
+    "prevLevels": [1]
+  },
+  {
+    "id": 3007,
+    "name": "Increase Agility",
+    "max": 5,
+    "jobId": 3,
+    "prevIds": [3004],
+    "prevLevels": [5]
+  },
+  {
+    "id": 3008,
+    "name": "Kyrie Eleison",
+    "max": 10,
+    "jobId": 3,
+    "prevIds": [3006],
+    "prevLevels": [5]
+  },
+  {
+    "id": 3009,
+    "name": "Ruwach",
+    "max": 1,
+    "jobId": 3,
+    "prevIds": [],
+    "prevLevels": []
+  }
+]
