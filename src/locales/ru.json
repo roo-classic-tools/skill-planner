@@ -55,5 +55,16 @@
   "ui.showSummary": "показать сводку",
   "ui.hideSummary": "скрыть сводку",
   "ui.copyBuildLink": "копировать ссылку",
-  "ui.copiedBuildLink": "ссылка скопирована"
+  "ui.copiedBuildLink": "ссылка скопирована",
+  "ui.resetSkillAndChildren": "Сбросить навык и все зависимые",
+  "ui.fastForwardToSetpoint": "Перейти к уровню {level}",
+  "ui.settings": "Настройки",
+  "ui.theme": "Тема",
+  "ui.darkMode": "Темная тема",
+  "ui.lightMode": "Светлая тема",
+  "ui.advancedControls": "Расширенные элементы",
+  "ui.showAdvancedControls": "Показать расширенные элементы",
+  "ui.showAdvancedControlsHint": "Кнопки быстрого перехода, возврата и каскадного сброса",
+  "ui.enabled": "Включено",
+  "ui.disabled": "Выключено"
 }

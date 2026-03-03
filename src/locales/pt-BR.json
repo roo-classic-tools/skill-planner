@@ -55,5 +55,16 @@
   "ui.showSummary": "mostrar resumo",
   "ui.hideSummary": "ocultar resumo",
   "ui.copyBuildLink": "copiar link da build",
-  "ui.copiedBuildLink": "link da build copiado!"
+  "ui.copiedBuildLink": "link da build copiado!",
+  "ui.resetSkillAndChildren": "Resetar habilidade e todas dependentes",
+  "ui.fastForwardToSetpoint": "Avançar para nível {level}",
+  "ui.settings": "Configurações",
+  "ui.theme": "Tema",
+  "ui.darkMode": "Modo Escuro",
+  "ui.lightMode": "Modo Claro",
+  "ui.advancedControls": "Controles Avançados",
+  "ui.showAdvancedControls": "Mostrar controles avançados",
+  "ui.showAdvancedControlsHint": "Botões de avanço rápido, retrocesso e reset em cascata",
+  "ui.enabled": "Ativado",
+  "ui.disabled": "Desativado"
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './SkillSummary.css';
 import { useTranslation } from '../../hooks/useTranslation';
+import SkillSprite from '../skillsprite/SkillSprite';
 
 function SkillSummary({ skillLevels, skills, onSaveBuild, skillPointsByJob, jobChain }) {
   const { t } = useTranslation();
@@ -39,7 +40,9 @@ function SkillSummary({ skillLevels, skills, onSaveBuild, skillPointsByJob, jobC
         skillId,
         name: skill.name,
         level,
-        max: skill.max
+        max: skill.max,
+        spriteX: skill.spriteX,
+        spriteY: skill.spriteY
       });
     });
 
@@ -77,6 +80,9 @@ function SkillSummary({ skillLevels, skills, onSaveBuild, skillPointsByJob, jobC
                     </div>
                     {jobSkills.map(skill => (
                       <div key={skill.skillId} className="SkillSummary-itemLine">
+                        <div className="SkillSummary-miniIcon">
+                          <SkillSprite spriteX={skill.spriteX} spriteY={skill.spriteY} size={25} />
+                        </div>
                         <div className="SkillSummary-levelValue">
                           {t(skill.name)}: {skill.level}/{skill.max}
                         </div>

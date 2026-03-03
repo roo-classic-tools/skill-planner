@@ -14,20 +14,36 @@
   transition: filter var(--transition-fast);
 }
 
-.Skill--locked {
+.Skill-iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.Skill--locked .Skill-iconPlaceholder {
   filter: grayscale(100%);
   opacity: 0.6;
 }
 
+.Skill--highlighted {
+  animation: skillHighlight 1s ease-in-out;
+}
+
+@keyframes skillHighlight {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50% { box-shadow: 0 0 15px 3px var(--color-primary); }
+}
+
 .Skill-iconPlaceholder {
-  width: 48px;
-  height: 48px;
-  background-color: var(--color-border);
+  width: 60px;
+  height: 60px;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
-  /* Placeholder for sprite background */
-  background-size: cover;
-  background-position: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .Skill-details {
@@ -35,6 +51,7 @@
   flex-direction: column;
   gap: var(--space-xs);
   width: 100%;
+  flex: 1;
 }
 
 .Skill-name {
@@ -53,6 +70,7 @@
   justify-content: center;
   align-items: center;
   gap: var(--space-xs);
+  margin-top: auto;
 }
 
 .Skill-value {
@@ -103,7 +121,6 @@
     font-size: var(--font-sm);
     min-height: 2rem;
   }
-  
   .Skill-iconPlaceholder {
     width: 40px;
     height: 40px;

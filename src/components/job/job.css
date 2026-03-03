@@ -7,31 +7,58 @@
 }
 
 .Job-header {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-lg);
 }
 
 .Job-title {
   font-weight: var(--font-bold);
-  font-size: var(--font-3xl);
+  font-size: var(--font-xl);
   color: var(--color-text-primary);
 }
 
 .Job-section {
   width: 100%;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-xl);
 }
 
 .Job-sectionHeader {
   font-weight: var(--font-semibold);
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
   color: var(--color-text-primary);
-  margin-bottom: var(--space-lg);
-  padding: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
   background-color: var(--color-bg-secondary);
   border-radius: var(--radius-md);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  gap: var(--space-sm);
+}
+
+.Job-sectionTitle {
+  flex-shrink: 0;
+}
+
+.Job-sectionPoints {
+  font-size: var(--font-md);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  padding: 2px var(--space-xs);
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-sm);
+  min-width: 50px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.Job-sectionPoints--cap {
+  color: var(--color-success);
+  font-weight: var(--font-semibold);
+}
+
+.Job-sectionPoints--over {
+  color: var(--color-warning);
+  font-weight: var(--font-semibold);
 }
 
 .Job-sectionButton {
@@ -64,7 +91,7 @@
   display: grid;
   grid-template-columns: repeat(var(--skill-grid-columns), 1fr);
   column-gap: var(--skill-grid-gap);
-  row-gap: var(--space-xl);
+  row-gap: var(--space-lg);
   width: 100%;
   position: relative;
 }
@@ -74,18 +101,18 @@
 }
 
 .Job-advancement {
-  margin-top: var(--space-2xl);
-  padding: var(--space-xl);
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
   background-color: var(--color-bg-secondary);
   border-radius: var(--radius-md);
   text-align: center;
 }
 
 .Job-advancementTitle {
-  font-size: var(--font-lg);
+  font-size: var(--font-md);
   font-weight: var(--font-semibold);
   color: var(--color-text-primary);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .Job-advancementButtons {
@@ -96,7 +123,7 @@
 }
 
 .Job-advancementButton {
-  padding: var(--space-md) var(--space-xl);
+  padding: var(--space-sm) var(--space-lg);
   font-size: var(--font-md);
   font-weight: var(--font-semibold);
   background-color: var(--color-primary);
@@ -131,7 +158,7 @@
   }
   
   .Job-title {
-    font-size: var(--font-2xl);
+    font-size: var(--font-lg);
   }
 }
 

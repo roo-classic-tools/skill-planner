@@ -55,5 +55,16 @@
   "ui.showSummary": "แสดงสรุป",
   "ui.hideSummary": "ซ่อนสรุป",
   "ui.copyBuildLink": "คัดลอกลิงก์",
-  "ui.copiedBuildLink": "คัดลอกลิงก์แล้ว"
+  "ui.copiedBuildLink": "คัดลอกลิงก์แล้ว",
+  "ui.resetSkillAndChildren": "รีเซ็ตทักษะและทักษะที่เกี่ยวข้อง",
+  "ui.fastForwardToSetpoint": "เลื่อนไปที่เลเวล {level}",
+  "ui.settings": "การตั้งค่า",
+  "ui.theme": "ธีม",
+  "ui.darkMode": "โหมดมืด",
+  "ui.lightMode": "โหมดสว่าง",
+  "ui.advancedControls": "การควบคุมขั้นสูง",
+  "ui.showAdvancedControls": "แสดงการควบคุมขั้นสูง",
+  "ui.showAdvancedControlsHint": "ปุ่มเลื่อนเร็ว ย้อนกลับ และรีเซ็ตแบบเชื่อมโยง",
+  "ui.enabled": "เปิดใช้งาน",
+  "ui.disabled": "ปิดใช้งาน"
 }

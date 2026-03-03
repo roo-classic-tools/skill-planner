@@ -20,16 +20,8 @@ export function useUrlSync(skillPlanner) {
           }
         }
         
-        // Check if the loaded job is tier 2
-        const loadedJob = skillPlanner.jobList.find(j => j.id === jobId);
-        
-        if (loadedJob && loadedJob.tier === 2 && loadedJob.baseJobId) {
-          // Load as base job with advanced job
-          skillPlanner.loadBuild(loadedJob.baseJobId, skillLevelsObj, jobId);
-        } else {
-          // Load normally
-          skillPlanner.loadBuild(jobId, skillLevelsObj);
-        }
+        // Load the build with the specified job
+        skillPlanner.loadBuild(jobId, skillLevelsObj);
       } catch (error) {
         console.error('Failed to load build from URL:', error);
       }
@@ -37,14 +29,10 @@ export function useUrlSync(skillPlanner) {
   }, [location.search]);
 
   const saveBuild = () => {
-    const { jobId, advancedJobId, skillLevels } = skillPlanner;
-    
-    // If we have an advanced job, save as the advanced job (tier 2)
-    // This makes the URL consistent whether you advance or select directly
-    const saveJobId = advancedJobId || jobId;
+    const { jobId, skillLevels } = skillPlanner;
     
     const skillArray = Object.entries(skillLevels).flat().map(Number);
-    const buildString = [saveJobId, ...skillArray].join(',');
+    const buildString = [jobId, ...skillArray].join(',');
     const encoded = btoa(buildString);
     
     const url = `${window.location.origin}${window.location.pathname}?build=${encoded}`;

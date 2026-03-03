@@ -55,5 +55,16 @@
   "ui.showSummary": "显示摘要",
   "ui.hideSummary": "隐藏摘要",
   "ui.copyBuildLink": "复制链接",
-  "ui.copiedBuildLink": "已复制链接"
+  "ui.copiedBuildLink": "已复制链接",
+  "ui.resetSkillAndChildren": "重置技能及所有依赖技能",
+  "ui.fastForwardToSetpoint": "快进到等级{level}",
+  "ui.settings": "设置",
+  "ui.theme": "主题",
+  "ui.darkMode": "深色模式",
+  "ui.lightMode": "浅色模式",
+  "ui.advancedControls": "高级控制",
+  "ui.showAdvancedControls": "显示高级控制",
+  "ui.showAdvancedControlsHint": "快进、后退和级联重置按钮",
+  "ui.enabled": "启用",
+  "ui.disabled": "禁用"
 }
