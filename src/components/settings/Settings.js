@@ -76,9 +76,6 @@ function Settings() {
                   <option value="both">{t('ui.both')}</option>
                   <option value="none">{t('ui.hidden')}</option>
                 </select>
-                <div className="Settings-hint">
-                  {t('ui.showPrereqsAsHint')}
-                </div>
               </div>
 
               <div className="Settings-section">
@@ -95,9 +92,6 @@ function Settings() {
                   <option value="both">{t('ui.both')}</option>
                   <option value="none">{t('ui.hidden')}</option>
                 </select>
-                <div className="Settings-hint">
-                  {t('ui.showUnlocksAsHint')}
-                </div>
               </div>
             </div>
           </div>

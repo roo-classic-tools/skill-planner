@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Job from './components/job/Job.js';
+import JobSelect from './components/jobselect/JobSelect.js';
 import SkillSummary from './components/skillsummary/SkillSummary.js';
 import Settings from './components/settings/Settings.js';
 import { useNavigate } from 'react-router-dom';
@@ -116,15 +117,12 @@ function App() {
     <div className="App">
       <div className="App-header">
         <div className="App-jobName">
-          <select 
-            name="job" 
-            value={skillPlanner.jobId} 
+          <JobSelect
+            jobs={skillPlanner.jobList}
+            value={skillPlanner.jobId}
             onChange={handleJobChange}
-          >
-            {skillPlanner.jobList.map((job) => (
-              <option key={job.id} value={job.id}>{t(job.name)}</option>
-            ))}
-          </select>
+            t={t}
+          />
         </div>
         
         <div className="App-totalJobPoints">
