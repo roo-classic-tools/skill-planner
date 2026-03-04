@@ -1,0 +1,91 @@
+@import '../../styles/variables.css';
+
+.PrereqBadges {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.PrereqBadges-heading {
+  font-size: var(--font-xs);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.PrereqBadges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.PrereqBadges-item {
+  font-size: var(--font-xs);
+  padding: 3px var(--space-xs);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.2;
+}
+
+.PrereqBadges-item--met {
+  background-color: rgba(25, 135, 84, 0.15);
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+}
+
+.PrereqBadges-item--unmet {
+  background-color: rgba(255, 193, 7, 0.15);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
+}
+
+.PrereqBadges-icon {
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.PrereqBadges-text {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.PrereqBadges-actions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.PrereqBadges-action {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+  color: inherit;
+}
+
+.PrereqBadges-action:hover {
+  opacity: 1;
+}
+
+.PrereqBadges-action svg {
+  width: 12px;
+  height: 12px;
+}

@@ -1,0 +1,70 @@
+@import '../../styles/variables.css';
+
+.UnlockIcons {
+  position: absolute;
+  left: 74px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  grid-template-columns: repeat(2, 28px);
+  grid-template-rows: repeat(2, 28px);
+  gap: 4px;
+}
+
+.UnlockIcons-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  position: relative;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  pointer-events: auto;
+}
+
+.UnlockIcons-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.UnlockIcons-icon--unmet {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.UnlockIcons-level {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 9px;
+  font-weight: var(--font-bold);
+  padding: 1px 3px;
+  line-height: 1.2;
+  border-top-left-radius: 3px;
+  min-width: 12px;
+  text-align: center;
+}
+
+.UnlockIcons-more {
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 2px 4px;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  min-width: 28px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

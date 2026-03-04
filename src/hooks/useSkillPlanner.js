@@ -8,8 +8,7 @@ const STORAGE_KEY = 'skillPlanner_autosave';
 // STATE STRUCTURE
 // ============================================================================
 const initialState = {
-  jobId: 1,              // Current base job being viewed
-  advancedJobId: null,   // Advanced (tier 2) job if selected
+  jobId: 1,              // Current job being viewed (can be any tier)
   skillLevels: {}        // { skillId: level }
 };
 
@@ -26,7 +25,6 @@ const loadInitialState = () => {
         return {
           ...initialState,
           jobId: parsed.jobId,
-          advancedJobId: parsed.advancedJobId || null,
           skillLevels: parsed.skillLevels || {}
         };
       }
@@ -41,7 +39,6 @@ const saveToStorage = (state) => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       jobId: state.jobId,
-      advancedJobId: state.advancedJobId,
       skillLevels: state.skillLevels
     }));
   } catch (error) {
@@ -62,7 +59,6 @@ const clearStorage = () => {
 // ============================================================================
 const actionTypes = {
   SET_JOB: 'SET_JOB',
-  SET_ADVANCED_JOB: 'SET_ADVANCED_JOB',
   SET_SKILL_LEVEL: 'SET_SKILL_LEVEL',
   RESET_SKILLS: 'RESET_SKILLS',
   RESET_JOB_SKILLS: 'RESET_JOB_SKILLS',
@@ -78,14 +74,7 @@ function skillPlannerReducer(state, action) {
       return {
         ...state,
         jobId: action.payload.jobId,
-        advancedJobId: null,
         skillLevels: action.payload.preserveSkills ? state.skillLevels : {}
-      };
-    
-    case actionTypes.SET_ADVANCED_JOB:
-      return {
-        ...state,
-        advancedJobId: action.payload
       };
     
     case actionTypes.SET_SKILL_LEVEL: {
@@ -137,7 +126,6 @@ function skillPlannerReducer(state, action) {
       return {
         ...state,
         jobId: action.payload.jobId,
-        advancedJobId: action.payload.advancedJobId || null,
         skillLevels: action.payload.skillLevels
       };
     
@@ -155,7 +143,7 @@ export function useSkillPlanner() {
   // Auto-save to localStorage
   useEffect(() => {
     saveToStorage(state);
-  }, [state.jobId, state.advancedJobId, state.skillLevels]);
+  }, [state.jobId, state.skillLevels]);
 
   // ============================================================================
   // COMPUTED VALUES - Jobs
@@ -164,36 +152,32 @@ export function useSkillPlanner() {
     return jobData.jobs.find(job => job.id === state.jobId);
   }, [state.jobId]);
 
-  const advancedJob = useMemo(() => {
-    if (!state.advancedJobId) return null;
-    return jobData.jobs.find(job => job.id === state.advancedJobId);
-  }, [state.advancedJobId]);
-
-  const baseJob = useMemo(() => {
-    if (!currentJob || !currentJob.baseJobId) return null;
-    return jobData.jobs.find(job => job.id === currentJob.baseJobId);
-  }, [currentJob]);
-
-  // Job chain: all jobs to display (base → current OR current → advanced)
+  // Build the complete job chain by walking up the baseJobId tree
   const jobChain = useMemo(() => {
-    const chain = [];
+    if (!currentJob) return [];
     
-    if (baseJob) {
-      // Viewing tier 2 directly
-      chain.push(baseJob, currentJob);
-    } else if (advancedJob) {
-      // Viewing tier 1 with advancement
-      chain.push(currentJob, advancedJob);
-    } else if (currentJob) {
-      // Just current job
-      chain.push(currentJob);
+    const chain = [];
+    let job = currentJob;
+    
+    // Walk up the tree to find all parent jobs
+    const parents = [];
+    while (job && job.baseJobId) {
+      const parent = jobData.jobs.find(j => j.id === job.baseJobId);
+      if (parent) {
+        parents.unshift(parent); // Add to beginning
+        job = parent;
+      } else {
+        break;
+      }
     }
     
-    return chain;
-  }, [baseJob, currentJob, advancedJob]);
+    // Chain is: all parents + current job
+    return [...parents, currentJob];
+  }, [currentJob]);
 
+  // Get advancement options for the current job
   const advancementOptions = useMemo(() => {
-    if (!currentJob || currentJob.tier !== 1) return [];
+    if (!currentJob) return [];
     return jobData.jobs.filter(job => job.baseJobId === currentJob.id);
   }, [currentJob]);
 
@@ -238,11 +222,10 @@ export function useSkillPlanner() {
   const jobWithSkills = useMemo(() => {
     return {
       ...currentJob,
-      baseJob,
       jobChain,
       skills: currentSkills
     };
-  }, [currentJob, baseJob, jobChain, currentSkills]);
+  }, [currentJob, jobChain, currentSkills]);
 
   // ============================================================================
   // ACTIONS
@@ -250,10 +233,6 @@ export function useSkillPlanner() {
   const actions = {
     setJob: (jobId, preserveSkills = false) => {
       dispatch({ type: actionTypes.SET_JOB, payload: { jobId, preserveSkills } });
-    },
-
-    setAdvancedJob: (jobId) => {
-      dispatch({ type: actionTypes.SET_ADVANCED_JOB, payload: jobId });
     },
 
     setSkillLevel: (skillId, level, max) => {
@@ -272,10 +251,10 @@ export function useSkillPlanner() {
       dispatch({ type: actionTypes.RESET_JOB_SKILLS, payload: jobId });
     },
 
-    loadBuild: (jobId, skillLevels, advancedJobId = null) => {
+    loadBuild: (jobId, skillLevels) => {
       dispatch({ 
         type: actionTypes.LOAD_BUILD, 
-        payload: { jobId, skillLevels, advancedJobId } 
+        payload: { jobId, skillLevels } 
       });
     }
   };
@@ -286,13 +265,10 @@ export function useSkillPlanner() {
   return {
     // Raw state
     jobId: state.jobId,
-    advancedJobId: state.advancedJobId,
     skillLevels: state.skillLevels,
     
     // Computed - Jobs
     currentJob,
-    baseJob,
-    advancedJob,
     jobChain,
     advancementOptions,
     jobList: jobData.jobs,

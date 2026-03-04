@@ -1,22 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Job from './components/job/Job.js';
 import SkillSummary from './components/skillsummary/SkillSummary.js';
+import Settings from './components/settings/Settings.js';
 import { useNavigate } from 'react-router-dom';
 import { useSkillPlanner } from './hooks/useSkillPlanner';
 import { useUrlSync } from './hooks/useUrlSync';
-import { useTheme } from './hooks/useTheme';
+import { useTranslation } from './hooks/useTranslation';
 
 function App() {
   const navigate = useNavigate();
   const skillPlanner = useSkillPlanner();
   const { saveBuild } = useUrlSync(skillPlanner);
-  const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
   const [copySuccess, setCopySuccess] = useState('');
 
   const handleSaveBuild = () => {
     saveBuild();
-    setCopySuccess('Build URL copied to clipboard!');
+    setCopySuccess(t('ui.buildUrlCopied'));
     setTimeout(() => setCopySuccess(''), 3000);
   };
 
@@ -36,32 +37,41 @@ function App() {
       return;
     }
     
-    // Check if jobs are in the same family
-    const isSameFamily = 
-      // Same job
-      newJobId === skillPlanner.jobId ||
-      // New job is advancement of current job
-      (newJob.baseJobId === skillPlanner.jobId) ||
-      // Current job is advancement of new job
-      (currentJob.baseJobId === newJobId) ||
-      // Both are advancements of the same base job
-      (newJob.baseJobId && currentJob.baseJobId && newJob.baseJobId === currentJob.baseJobId);
-    
-    if (isSameFamily) {
-      // Same family - preserve skills and switch
-      if (newJob.tier === 2 && newJob.baseJobId) {
-        // Switching to tier 2 - set as base job with advanced job
-        skillPlanner.setJob(newJob.baseJobId, true);
-        skillPlanner.setAdvancedJob(newJobId);
-      } else {
-        // Switching to tier 1 - just set the job
-        skillPlanner.setJob(newJobId, true);
+    // Helper to check if two jobs are in the same progression chain
+    const isInSameChain = (job1, job2) => {
+      if (!job1 || !job2) return false;
+      if (job1.id === job2.id) return true;
+      
+      // Build chain for job1
+      const chain1 = [job1.id];
+      let current = job1;
+      while (current.baseJobId) {
+        chain1.push(current.baseJobId);
+        current = skillPlanner.jobList.find(j => j.id === current.baseJobId);
+        if (!current) break;
       }
+      
+      // Build chain for job2
+      const chain2 = [job2.id];
+      current = job2;
+      while (current.baseJobId) {
+        chain2.push(current.baseJobId);
+        current = skillPlanner.jobList.find(j => j.id === current.baseJobId);
+        if (!current) break;
+      }
+      
+      // Check if any job appears in both chains
+      return chain1.some(id => chain2.includes(id));
+    };
+    
+    if (isInSameChain(currentJob, newJob)) {
+      // Same family - preserve skills and switch
+      skillPlanner.setJob(newJobId, true);
       navigate('/', { replace: true });
       window.scrollTo({ top: 0, left: 0 });
     } else {
       // Different family - warn and reset
-      if (window.confirm("Changing to a different job family will reset all skills. Continue?")) {
+      if (window.confirm(t('ui.confirmJobFamilyChange'))) {
         skillPlanner.setJob(newJobId);
         navigate('/', { replace: true });
         window.scrollTo({ top: 0, left: 0 });
@@ -69,8 +79,15 @@ function App() {
     }
   };
   
+  const handleAdvance = (newJobId) => {
+    // Advancement is always within the same job family, so preserve skills
+    skillPlanner.setJob(newJobId, true);
+    navigate('/', { replace: true });
+    window.scrollTo({ top: 0, left: 0 });
+  };
+  
   const handleResetSkills = () => {
-    if (window.confirm("Are you sure you want to reset all skills?")) {
+    if (window.confirm(t('ui.confirmResetAllSkills'))) {
       skillPlanner.resetSkills();
       navigate('/', { replace: true });
     }
@@ -101,11 +118,11 @@ function App() {
         <div className="App-jobName">
           <select 
             name="job" 
-            value={skillPlanner.advancedJobId || skillPlanner.jobId} 
+            value={skillPlanner.jobId} 
             onChange={handleJobChange}
           >
             {skillPlanner.jobList.map((job) => (
-              <option key={job.id} value={job.id}>{job.name}</option>
+              <option key={job.id} value={job.id}>{t(job.name)}</option>
             ))}
           </select>
         </div>
@@ -113,14 +130,14 @@ function App() {
         <div className="App-totalJobPoints">
           {jobPointStatuses.map((status, index) => (
             <div key={status.job.id} className={status.isOver ? 'App-jobWarning' : ''}>
-              {status.job.name}: {status.points}/{status.job.maxPoints}
+              {t(status.job.name)}: {status.points}/{status.job.maxPoints}
             </div>
           ))}
         </div>
         
         <div className="App-jobButtons">
-          <button onClick={handleSaveBuild}>save</button>
-          <button onClick={handleResetSkills}>reset</button>
+          <button onClick={handleSaveBuild}>{t('ui.save')}</button>
+          <button onClick={handleResetSkills}>{t('ui.reset')}</button>
           <SkillSummary
             skillLevels={skillPlanner.skillLevels}
             skills={skillPlanner.currentSkills}
@@ -128,9 +145,7 @@ function App() {
             skillPointsByJob={skillPlanner.skillPointsByJob}
             jobChain={skillPlanner.jobChain}
           />
-          <button onClick={toggleTheme} title="Toggle theme">
-            {theme === 'light' ? '🌙' : '☀️'}
-          </button>
+          <Settings />
         </div>
         
         {copySuccess && (
@@ -146,8 +161,7 @@ function App() {
           skillLevels={skillPlanner.skillLevels}
           setSkillLevel={skillPlanner.setSkillLevel}
           advancementOptions={skillPlanner.advancementOptions}
-          advancedJobId={skillPlanner.advancedJobId}
-          onAdvance={skillPlanner.setAdvancedJob}
+          onAdvance={handleAdvance}
           onResetJobSkills={skillPlanner.resetJobSkills}
         />
       </div>
