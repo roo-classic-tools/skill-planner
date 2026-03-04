@@ -42,8 +42,8 @@ export function buildDependentSkills(skills, skillLevels, skillId, jobs = {}) {
 }
 
 /**
- * Identify prerequisites that won't get a visual connection line.
- * These need badges/icons instead: cross-tier, same-row, non-adjacent rows, or blocked.
+ * Build prerequisite display data for a skill.
+ * Returns ALL prerequisites with their current/required levels.
  */
 export function buildHiddenPrereqs(skills, skillLevels, skillTree, skillId, index, columnsCount, jobs = {}) {
   const skill = skills[skillId];
@@ -59,7 +59,7 @@ export function buildHiddenPrereqs(skills, skillLevels, skillTree, skillId, inde
       if (!prereqSkill) return null;
 
       const job = jobs[prereqSkill.jobId];
-      const makeEntry = () => ({
+      return {
         id: prereqId,
         name: prereqSkill.name,
         jobName: job ? job.name : null,
@@ -67,34 +67,7 @@ export function buildHiddenPrereqs(skills, skillLevels, skillTree, skillId, inde
         currentLevel: prevLevelsCurrent[idx],
         spriteX: prereqSkill.spriteX,
         spriteY: prereqSkill.spriteY
-      });
-
-      const prevIndex = skillTree.indexOf(prereqId);
-
-      // Cross-tier prerequisite
-      if (prevIndex === -1) return makeEntry();
-
-      const sourceRow = Math.floor(prevIndex / columnsCount);
-      const targetRow = Math.floor(index / columnsCount);
-      const sourceCol = prevIndex % columnsCount;
-
-      // Same row — no line drawn
-      if (sourceRow === targetRow) return makeEntry();
-
-      // Non-adjacent rows — no line drawn
-      if (targetRow - sourceRow !== 1) return makeEntry();
-
-      // Same column with skill in between — no line drawn
-      const targetCol = index % columnsCount;
-      if (sourceCol === targetCol) {
-        const betweenIndex = prevIndex + columnsCount;
-        if (betweenIndex !== index && skillTree[betweenIndex] > 0) {
-          return makeEntry();
-        }
-      }
-
-      // This prerequisite will have a connection line, no badge needed
-      return null;
+      };
     })
     .filter(Boolean);
 }
@@ -148,36 +121,6 @@ export function useSkillTreeActions(skills, skillLevels, skillTree, handleSkillU
     }
   }, [skills, skillLevels, isAtCap, handleSkillUpdate, resetSkillTree]);
 
-  const fastForward = useCallback((skillId, max) => {
-    const currentLevel = skillLevels[skillId] || 0;
-    const setpoints = [];
-    findDependentSkills(skills, skillId).forEach(depId => {
-      const dep = skills[depId];
-      if (dep) {
-        const idx = dep.prevIds.indexOf(skillId);
-        if (idx !== -1 && dep.prevLevels[idx] > currentLevel) {
-          setpoints.push(dep.prevLevels[idx]);
-        }
-      }
-    });
-    handleSkillUpdate(skillId, max)(setpoints.length > 0 ? Math.min(...setpoints) : max);
-  }, [skills, skillLevels, handleSkillUpdate]);
-
-  const rewind = useCallback((skillId, max) => {
-    const currentLevel = skillLevels[skillId] || 0;
-    const setpoints = [0];
-    findDependentSkills(skills, skillId).forEach(depId => {
-      const dep = skills[depId];
-      if (dep) {
-        const idx = dep.prevIds.indexOf(skillId);
-        if (idx !== -1 && dep.prevLevels[idx] < currentLevel) {
-          setpoints.push(dep.prevLevels[idx]);
-        }
-      }
-    });
-    handleSkillUpdate(skillId, max)(Math.max(...setpoints));
-  }, [skills, skillLevels, handleSkillUpdate]);
-
   const quickAddPrereq = useCallback((skillId, requiredLevel) => {
     const skill = skills[skillId];
     if (!skill) return;
@@ -195,10 +138,8 @@ export function useSkillTreeActions(skills, skillLevels, skillTree, handleSkillU
     isAtCap,
     isOverCap,
     SKILL_POINT_CAP,
-    resetSkillTree,
     updateWithCascade,
-    fastForward,
-    rewind,
     quickAddPrereq
   };
 }
+

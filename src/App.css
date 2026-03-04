@@ -49,6 +49,7 @@
   color: var(--color-text-primary);
   cursor: pointer;
   transition: border-color var(--transition-fast);
+  min-width: 200px;
 }
 
 .App-jobName select:hover {
@@ -74,9 +75,10 @@
 }
 
 .App-jobButtons button {
-  padding: var(--space-xs) var(--space-md);
-  font-size: var(--font-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-xs);
   font-weight: var(--font-medium);
+  line-height: 1;
   background-color: var(--color-primary);
   color: white;
   border: none;

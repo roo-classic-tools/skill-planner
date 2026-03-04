@@ -1,20 +1,38 @@
 import { useState, useEffect, createContext, useContext } from 'react';
 
-// Import all locale files
-import en from '../locales/en.json';
-import th from '../locales/th.json';
-import vi from '../locales/vi.json';
-import ptBR from '../locales/pt-BR.json';
-import ru from '../locales/ru.json';
-import zh from '../locales/zh.json';
+// Import all locale files - organized by locale folder
+import enUi from '../locales/en/ui.json';
+import enJobs from '../locales/en/jobs.json';
+import enSkills from '../locales/en/skills.json';
 
+import thUi from '../locales/th/ui.json';
+import thJobs from '../locales/th/jobs.json';
+import thSkills from '../locales/th/skills.json';
+
+import viUi from '../locales/vi/ui.json';
+import viJobs from '../locales/vi/jobs.json';
+import viSkills from '../locales/vi/skills.json';
+
+import ptBRUi from '../locales/pt-BR/ui.json';
+import ptBRJobs from '../locales/pt-BR/jobs.json';
+import ptBRSkills from '../locales/pt-BR/skills.json';
+
+import ruUi from '../locales/ru/ui.json';
+import ruJobs from '../locales/ru/jobs.json';
+import ruSkills from '../locales/ru/skills.json';
+
+import zhUi from '../locales/zh/ui.json';
+import zhJobs from '../locales/zh/jobs.json';
+import zhSkills from '../locales/zh/skills.json';
+
+// Merge locale files per language
 const translations = {
-  en,
-  th,
-  vi,
-  'pt-BR': ptBR,
-  ru,
-  zh
+  en: { ...enUi, ...enJobs, ...enSkills },
+  th: { ...thUi, ...thJobs, ...thSkills },
+  vi: { ...viUi, ...viJobs, ...viSkills },
+  'pt-BR': { ...ptBRUi, ...ptBRJobs, ...ptBRSkills },
+  ru: { ...ruUi, ...ruJobs, ...ruSkills },
+  zh: { ...zhUi, ...zhJobs, ...zhSkills }
 };
 
 const STORAGE_KEY = 'skillPlanner_locale';
@@ -98,4 +116,3 @@ export function useTranslation() {
   }
   return context;
 }
-
