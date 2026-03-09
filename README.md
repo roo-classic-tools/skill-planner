@@ -1,11 +1,13 @@
 # Skill Planner
 
-We have 5 columns now instead of 3.
+Basic skill planner for Ragnarok Origin Classic. Data correctness (especially the embedded descriptions and stats) have not been reviewed as I don't have access to the game.
+
+Translations are just a formality but should help if forks want to pick their own language and run with it.
 
 ## Features
 
-- SVG connections (whether they look good tbd)
-- Job-locked skill points
+- Create builds for any of the available classes
+- Save and share via URL
 
 ## Development
 
